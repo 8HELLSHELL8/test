@@ -1,147 +1,106 @@
 #include <iostream>
+#include <sstream>
 #include <thread>
-#include <chrono>
 #include <mutex>
-#include <semaphore>
-#include <barrier>
+
 using namespace std;
 
-void PrintForRace(char asciiSym)
+
+class RaceState
 {
-    this_thread::sleep_for(chrono::milliseconds(500));
-    for (int i = 0; i < 5; i++)
+private:
+
+    static void safePrint(const string& word)
     {
-        cout << asciiSym;
+        lock_guard<mutex> mtx(mutex);
+        cout << word;
     }
-    
-}
 
-
-void RaceState()
-{
-    auto start = std::chrono::high_resolution_clock::now();
-    
-    thread th1(PrintForRace, 'a');
-    thread th2(PrintForRace, 'b');
-    thread th3(PrintForRace, 'c');
-    thread th4(PrintForRace, 'd');
-
-    th1.detach();
-    th2.detach();
-    th3.detach();
-    th4.join();
-
-    auto end = std::chrono::high_resolution_clock::now();
-    chrono::duration<double> elapsed = end - start;
-    cout << endl << "Elapsed time in race function: " << elapsed.count() << " seconds\n";
-}
-
-mutex mtx;
-
-
-
-void PrintForMutexes(char asciiSym)
-{
-    lock_guard<mutex> mutexCheck(mtx);
-    //this_thread::sleep_for(chrono::milliseconds(500));
-    for (int i = 0; i < 5; i++)
+    static void wordAdd(const char& sym) 
     {
-        cout << asciiSym;
+        this_thread::sleep_for(chrono::milliseconds(300));
+        ostringstream buffer;
+        for (int i = 0; i < 3; i++)
+        {
+            buffer << sym;
+        }
+        safePrint(buffer.str());
     }
-    
-}
 
-void MutexesState()
-{
-    auto start = std::chrono::high_resolution_clock::now();
-    thread th1(PrintForMutexes, 'a');
-    th1.detach();
-    thread th2(PrintForMutexes, 'b');
-    th2.detach();
-    thread th3(PrintForMutexes, 'c');
-    th3.detach();
-    thread th4(PrintForMutexes, 'd');
-    
-    th4.join();
+public:
 
-    auto end = std::chrono::high_resolution_clock::now();
-    chrono::duration<double> elapsed = end - start;
-    cout << endl << "Elapsed time in mutex lock function: " << elapsed.count() << " seconds\n";
-
-}
-
-counting_semaphore<4> sem(2);
-
-void PrintForSemaphore(char asciiSym)
-{
-    sem.acquire();
-    //this_thread::sleep_for(chrono::milliseconds(500));
-    for (int i = 0; i < 5; i++)
+    void checkTime() 
     {
-        cout << asciiSym;
+        auto start = chrono::high_resolution_clock::now();
+
+        jthread th1(wordAdd, 'a');
+        jthread th2(wordAdd, 'b');
+        jthread th3(wordAdd, 'c');
+        jthread th4(wordAdd, 'd');
+
+
+        auto end = chrono::high_resolution_clock::now();
+        chrono::duration<double> elapsed = end - start;
+        safePrint("\nElapsed time in race function: " + to_string(elapsed.count()) + " seconds\n");
     }
-    sem.release();
-    
-}
+};
 
-void SemaphoreState()
+
+class MutexState
 {
-    auto start = std::chrono::high_resolution_clock::now();
-    thread th1(PrintForSemaphore, 'a');
-    th1.detach();
-    thread th2(PrintForSemaphore, 'b');
-    th2.detach();
-    thread th3(PrintForSemaphore, 'c');
-    th3.detach();
-    thread th4(PrintForSemaphore, 'd');
-    
-    
-    
-    th4.join();
+private:
 
-    auto end = std::chrono::high_resolution_clock::now();
-    chrono::duration<double> elapsed = end - start;
-    cout << endl << "Elapsed time in semaphore lock function: " << elapsed.count() << " seconds\n";
-}
 
-barrier myBarrier{4};
+    static void safePrint(const string& word)
+    {
+        
+        cout << word;
+    }
 
-void PrintForBarrier(char sym)
-{
-    myBarrier.arrive_and_wait();
-    cout << sym;
-}
+    static void wordAdd(const char& sym) 
+    {
+        lock_guard<mutex> mutexForFunc(mutex);
+        this_thread::sleep_for(chrono::milliseconds(300));
+        lock_guard<mutex> mtx(mutex);
+        ostringstream buffer;
+        for (int i = 0; i < 3; i++)
+        {
+            buffer << sym;
+        }
+        safePrint(buffer.str());
+    }
 
-void BarrierState()
-{
-    auto start = std::chrono::high_resolution_clock::now();
-    thread th1(PrintForBarrier, 'a');
-    th1.detach();
-    thread th2(PrintForBarrier, 'b');
-    th2.detach();
-    thread th3(PrintForBarrier, 'c');
-    th3.detach();
-    thread th4(PrintForBarrier, 'd');
-    
-    //th1.join();
-    //th2.join();
-    //th3.join();
-    th4.join();
 
-    auto end = std::chrono::high_resolution_clock::now();
-    chrono::duration<double> elapsed = end - start;
-    cout << endl << "Elapsed time in barrier lock function: " << elapsed.count() << " seconds\n";
-}
+public:
+
+    void checkTime()
+    {
+        auto start = chrono::high_resolution_clock::now();
+
+        jthread th1(wordAdd, 'a');
+        jthread th2(wordAdd, 'b');
+        jthread th3(wordAdd, 'c');
+        jthread th4(wordAdd, 'd');
+
+
+        auto end = chrono::high_resolution_clock::now();
+        chrono::duration<double> elapsed = end - start;
+        safePrint("\nElapsed time for mutex: " + to_string(elapsed.count()) + " seconds\n");
+    }
+
+};
 
 
 int main()
 {
-    //RaceState();
-    chrono::milliseconds(500);
-    //MutexesState();
-    chrono::milliseconds(500);
-    //SemaphoreState();
-    chrono::milliseconds(500);
-    BarrierState();
+
+    RaceState race;
+    race.checkTime();
+
+    this_thread::sleep_for(chrono::milliseconds(200));
+
+    MutexState mutexes;
+    mutexes.checkTime();
+
     return 0;
 }
