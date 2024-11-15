@@ -1,0 +1,14 @@
+/home/anton/3laba_2kurs/BenchmarkApp/bin/Release/net8.0/BenchmarkApp
+/home/anton/3laba_2kurs/BenchmarkApp/bin/Release/net8.0/BenchmarkApp.deps.json
+/home/anton/3laba_2kurs/BenchmarkApp/bin/Release/net8.0/BenchmarkApp.runtimeconfig.json
+/home/anton/3laba_2kurs/BenchmarkApp/bin/Release/net8.0/BenchmarkApp.dll
+/home/anton/3laba_2kurs/BenchmarkApp/bin/Release/net8.0/BenchmarkApp.pdb
+/home/anton/3laba_2kurs/BenchmarkApp/obj/Release/net8.0/BenchmarkApp.GeneratedMSBuildEditorConfig.editorconfig
+/home/anton/3laba_2kurs/BenchmarkApp/obj/Release/net8.0/BenchmarkApp.AssemblyInfoInputs.cache
+/home/anton/3laba_2kurs/BenchmarkApp/obj/Release/net8.0/BenchmarkApp.AssemblyInfo.cs
+/home/anton/3laba_2kurs/BenchmarkApp/obj/Release/net8.0/BenchmarkApp.csproj.CoreCompileInputs.cache
+/home/anton/3laba_2kurs/BenchmarkApp/obj/Release/net8.0/BenchmarkApp.dll
+/home/anton/3laba_2kurs/BenchmarkApp/obj/Release/net8.0/refint/BenchmarkApp.dll
+/home/anton/3laba_2kurs/BenchmarkApp/obj/Release/net8.0/BenchmarkApp.pdb
+/home/anton/3laba_2kurs/BenchmarkApp/obj/Release/net8.0/BenchmarkApp.genruntimeconfig.cache
+/home/anton/3laba_2kurs/BenchmarkApp/obj/Release/net8.0/ref/BenchmarkApp.dll
