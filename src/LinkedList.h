@@ -48,6 +48,18 @@ public:
         return head == nullptr;
     }           
 
+    int size() const 
+    {
+        int counter = 0;
+        Node* current = head;
+        while (current) 
+        {
+            ++counter;
+            current = current->next;
+        }
+        return counter;
+    }
+
     void addhead(string name) 
     {
         Node* newnode = new Node(name);
@@ -171,11 +183,27 @@ public:
 
         if (!found) 
         {
-            cout << "Element \"" << name << "\" not found in LinkedList!!!" << "\n";
+            //cout << "Element \"" << name << "\" not found in LinkedList!!!" << "\n";
+            throw runtime_error("Element not found in LinkedList!!!");
         }
     }      
 
-    void search(string name) 
+    string get(int index) 
+    {
+        if (index < 0 || is_empty() || index >= size()) 
+        {
+            throw out_of_range("Index out of range!");
+        }
+
+        Node* current = head;
+        for (int i = 0; i < index; ++i) 
+        {
+            current = current->next;
+        }
+        return current->person;
+    }
+
+    bool search(string name) 
     {
         if (is_empty()) 
         {
@@ -188,8 +216,8 @@ public:
         {
             if (current->person == name) 
             {
-                cout << "Element \"" << current->person << "\" was found in LinkedList!!!" << "\n";
-                return;
+                //cout << "Element \"" << current->person << "\" was found in LinkedList!!!" << "\n";
+                return 1;
             }
             current = current->next;
         }
@@ -333,13 +361,3 @@ public:
     }
     
 };
-
-
-
-
-
-
-
-
-
-

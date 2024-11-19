@@ -1,4 +1,5 @@
 /home/anton/3laba_2kurs/build/CMakeFiles/run_tests_DynamicArray.dir
 /home/anton/3laba_2kurs/build/CMakeFiles/run_tests_ForwardList.dir
+/home/anton/3laba_2kurs/build/CMakeFiles/run_tests_LinkedList.dir
 /home/anton/3laba_2kurs/build/CMakeFiles/edit_cache.dir
 /home/anton/3laba_2kurs/build/CMakeFiles/rebuild_cache.dir

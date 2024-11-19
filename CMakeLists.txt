@@ -26,4 +26,10 @@ add_executable(run_tests_ForwardList
 )
 target_link_libraries(run_tests_ForwardList GTest::GTest GTest::Main)
 
+add_executable(run_tests_LinkedList
+    tests/test_LinkedList.cpp
+    src/ForwardList.h
+)
+target_link_libraries(run_tests_LinkedList GTest::GTest GTest::Main)
+
 # Добавьте аналогичные секции для других тестов...

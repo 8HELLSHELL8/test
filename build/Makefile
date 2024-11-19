@@ -142,6 +142,19 @@ run_tests_ForwardList/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_ForwardList.dir/build.make CMakeFiles/run_tests_ForwardList.dir/build
 .PHONY : run_tests_ForwardList/fast
 
+#=============================================================================
+# Target rules for targets named run_tests_LinkedList
+
+# Build rule for target.
+run_tests_LinkedList: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run_tests_LinkedList
+.PHONY : run_tests_LinkedList
+
+# fast build rule for target.
+run_tests_LinkedList/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_LinkedList.dir/build.make CMakeFiles/run_tests_LinkedList.dir/build
+.PHONY : run_tests_LinkedList/fast
+
 tests/test_DynamicArray.o: tests/test_DynamicArray.cpp.o
 .PHONY : tests/test_DynamicArray.o
 
@@ -190,6 +203,30 @@ tests/test_ForwardList.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_ForwardList.dir/build.make CMakeFiles/run_tests_ForwardList.dir/tests/test_ForwardList.cpp.s
 .PHONY : tests/test_ForwardList.cpp.s
 
+tests/test_LinkedList.o: tests/test_LinkedList.cpp.o
+.PHONY : tests/test_LinkedList.o
+
+# target to build an object file
+tests/test_LinkedList.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_LinkedList.dir/build.make CMakeFiles/run_tests_LinkedList.dir/tests/test_LinkedList.cpp.o
+.PHONY : tests/test_LinkedList.cpp.o
+
+tests/test_LinkedList.i: tests/test_LinkedList.cpp.i
+.PHONY : tests/test_LinkedList.i
+
+# target to preprocess a source file
+tests/test_LinkedList.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_LinkedList.dir/build.make CMakeFiles/run_tests_LinkedList.dir/tests/test_LinkedList.cpp.i
+.PHONY : tests/test_LinkedList.cpp.i
+
+tests/test_LinkedList.s: tests/test_LinkedList.cpp.s
+.PHONY : tests/test_LinkedList.s
+
+# target to generate assembly for a file
+tests/test_LinkedList.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_LinkedList.dir/build.make CMakeFiles/run_tests_LinkedList.dir/tests/test_LinkedList.cpp.s
+.PHONY : tests/test_LinkedList.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -200,12 +237,16 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... run_tests_DynamicArray"
 	@echo "... run_tests_ForwardList"
+	@echo "... run_tests_LinkedList"
 	@echo "... tests/test_DynamicArray.o"
 	@echo "... tests/test_DynamicArray.i"
 	@echo "... tests/test_DynamicArray.s"
 	@echo "... tests/test_ForwardList.o"
 	@echo "... tests/test_ForwardList.i"
 	@echo "... tests/test_ForwardList.s"
+	@echo "... tests/test_LinkedList.o"
+	@echo "... tests/test_LinkedList.i"
+	@echo "... tests/test_LinkedList.s"
 .PHONY : help
 
 

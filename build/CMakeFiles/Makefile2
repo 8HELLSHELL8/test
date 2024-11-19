@@ -65,6 +65,7 @@ CMAKE_BINARY_DIR = /home/anton/3laba_2kurs/build
 # The main recursive "all" target.
 all: CMakeFiles/run_tests_DynamicArray.dir/all
 all: CMakeFiles/run_tests_ForwardList.dir/all
+all: CMakeFiles/run_tests_LinkedList.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -74,6 +75,7 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/run_tests_DynamicArray.dir/clean
 clean: CMakeFiles/run_tests_ForwardList.dir/clean
+clean: CMakeFiles/run_tests_LinkedList.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -127,6 +129,32 @@ run_tests_ForwardList: CMakeFiles/run_tests_ForwardList.dir/rule
 CMakeFiles/run_tests_ForwardList.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_ForwardList.dir/build.make CMakeFiles/run_tests_ForwardList.dir/clean
 .PHONY : CMakeFiles/run_tests_ForwardList.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/run_tests_LinkedList.dir
+
+# All Build rule for target.
+CMakeFiles/run_tests_LinkedList.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_LinkedList.dir/build.make CMakeFiles/run_tests_LinkedList.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_LinkedList.dir/build.make CMakeFiles/run_tests_LinkedList.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/anton/3laba_2kurs/build/CMakeFiles --progress-num=5,6 "Built target run_tests_LinkedList"
+.PHONY : CMakeFiles/run_tests_LinkedList.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/run_tests_LinkedList.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/anton/3laba_2kurs/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/run_tests_LinkedList.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/anton/3laba_2kurs/build/CMakeFiles 0
+.PHONY : CMakeFiles/run_tests_LinkedList.dir/rule
+
+# Convenience name for target.
+run_tests_LinkedList: CMakeFiles/run_tests_LinkedList.dir/rule
+.PHONY : run_tests_LinkedList
+
+# clean rule for target.
+CMakeFiles/run_tests_LinkedList.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_LinkedList.dir/build.make CMakeFiles/run_tests_LinkedList.dir/clean
+.PHONY : CMakeFiles/run_tests_LinkedList.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
