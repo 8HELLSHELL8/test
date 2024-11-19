@@ -72,7 +72,7 @@ TEST(DynamicArray_test, MPUSHAtIndex)
 
 }
 
-TEST(DynamicArrayTest, Iterators) 
+TEST(DynamicArray_test, Iterators) 
 {
     DynamicArray<int> array = {10, 20, 30};
     auto it = array.begin();
@@ -106,7 +106,7 @@ TEST(DynamicArray_test, MDEL)
     }
     catch(const out_of_range& e)
     {
-        EXPECT_STREQ(e.what(), "Index out of range");
+        EXPECT_STREQ(e.what(), "Index out of range!!!");
     }
 }
 
@@ -124,7 +124,7 @@ TEST(DynamicArray_test, MSET)
     EXPECT_EQ(array.size(), 3);
 }
 
-TEST(DynamicArrayTest, Resize) 
+TEST(DynamicArray_test, Resize) 
 {
     DynamicArray<int> array;
     array.MPUSH(10);
