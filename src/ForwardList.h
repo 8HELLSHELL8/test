@@ -45,26 +45,30 @@ public:
         return head == nullptr;
     }
 
-    string get(int index)
+    string get(int index) 
     {
-        if (is_empty() || size() <= index)
+        if (index < 0 || is_empty() || index >= size()) 
         {
-            throw out_of_range("Index of range!");
+            throw out_of_range("Index out of range!");
         }
+
         Node* current = head;
-        for (int i = 0; i <= index; i++, current = current->next){}
+        for (int i = 0; i < index; ++i) 
+        {
+            current = current->next;
+        }
         return current->person;
     }
 
-    int size()
+    int size() const 
     {
-        if (is_empty())
-        {
-            return 0;
-        }
-        
         int counter = 0;
-        for (Node* current = head; current == head; counter++,current = current->next){}
+        Node* current = head;
+        while (current) 
+        {
+            ++counter;
+            current = current->next;
+        }
         return counter;
     }
 
