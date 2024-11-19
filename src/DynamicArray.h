@@ -96,7 +96,7 @@ public:
     {
         if (index < 0 || index > size_of_Vec) 
         {
-            throw out_of_range("Index out of range!!!");
+            throw std::out_of_range("Index out of range");
         }
 
         if (size_of_Vec == memory_size) 
