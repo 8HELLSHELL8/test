@@ -8,8 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/anton/3laba_2kurs/tests/test.cpp" "CMakeFiles/run_tests.dir/tests/test.cpp.o" "gcc" "CMakeFiles/run_tests.dir/tests/test.cpp.o.d"
-  "/home/anton/3laba_2kurs/tests/test_DynamicArray.cpp" "CMakeFiles/run_tests.dir/tests/test_DynamicArray.cpp.o" "gcc" "CMakeFiles/run_tests.dir/tests/test_DynamicArray.cpp.o.d"
+  "/home/anton/3laba_2kurs/tests/test_ForwardList.cpp" "CMakeFiles/run_tests_ForwardList.dir/tests/test_ForwardList.cpp.o" "gcc" "CMakeFiles/run_tests_ForwardList.dir/tests/test_ForwardList.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

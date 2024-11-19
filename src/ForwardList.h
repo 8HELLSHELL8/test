@@ -45,6 +45,29 @@ public:
         return head == nullptr;
     }
 
+    string get(int index)
+    {
+        if (is_empty() || size() <= index)
+        {
+            throw out_of_range("Index of range!");
+        }
+        Node* current = head;
+        for (int i = 0; i <= index; i++, current = current->next){}
+        return current->person;
+    }
+
+    int size()
+    {
+        if (is_empty())
+        {
+            return 0;
+        }
+        
+        int counter = 0;
+        for (Node* current = head; current == head; counter++,current = current->next){}
+        return counter;
+    }
+
     void addtail(string name) 
     {
         Node* newNode = new Node(name);

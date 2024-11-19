@@ -20,12 +20,10 @@ add_executable(run_tests_DynamicArray
 )
 target_link_libraries(run_tests_DynamicArray GTest::GTest GTest::Main)
 
-# Тесты для MyClass2
-
-# add_executable(run_tests_MyClass2
-#     tests/test_MyClass2.cpp
-#     src/MyClass2.cpp
-# )
-# target_link_libraries(run_tests_MyClass2 GTest::GTest GTest::Main)
+add_executable(run_tests_ForwardList
+    tests/test_ForwardList.cpp
+    src/ForwardList.h
+)
+target_link_libraries(run_tests_ForwardList GTest::GTest GTest::Main)
 
 # Добавьте аналогичные секции для других тестов...

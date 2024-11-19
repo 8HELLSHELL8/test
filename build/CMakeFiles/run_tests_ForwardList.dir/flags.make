@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/anton/3laba_2kurs/src
 
-CXX_FLAGS = -std=gnu++23 -DGTEST_HAS_PTHREAD=1
+CXX_FLAGS = -DGTEST_HAS_PTHREAD=1
 

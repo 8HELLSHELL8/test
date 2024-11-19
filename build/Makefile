@@ -129,6 +129,19 @@ run_tests_DynamicArray/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_DynamicArray.dir/build.make CMakeFiles/run_tests_DynamicArray.dir/build
 .PHONY : run_tests_DynamicArray/fast
 
+#=============================================================================
+# Target rules for targets named run_tests_ForwardList
+
+# Build rule for target.
+run_tests_ForwardList: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run_tests_ForwardList
+.PHONY : run_tests_ForwardList
+
+# fast build rule for target.
+run_tests_ForwardList/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_ForwardList.dir/build.make CMakeFiles/run_tests_ForwardList.dir/build
+.PHONY : run_tests_ForwardList/fast
+
 tests/test_DynamicArray.o: tests/test_DynamicArray.cpp.o
 .PHONY : tests/test_DynamicArray.o
 
@@ -153,6 +166,30 @@ tests/test_DynamicArray.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_DynamicArray.dir/build.make CMakeFiles/run_tests_DynamicArray.dir/tests/test_DynamicArray.cpp.s
 .PHONY : tests/test_DynamicArray.cpp.s
 
+tests/test_ForwardList.o: tests/test_ForwardList.cpp.o
+.PHONY : tests/test_ForwardList.o
+
+# target to build an object file
+tests/test_ForwardList.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_ForwardList.dir/build.make CMakeFiles/run_tests_ForwardList.dir/tests/test_ForwardList.cpp.o
+.PHONY : tests/test_ForwardList.cpp.o
+
+tests/test_ForwardList.i: tests/test_ForwardList.cpp.i
+.PHONY : tests/test_ForwardList.i
+
+# target to preprocess a source file
+tests/test_ForwardList.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_ForwardList.dir/build.make CMakeFiles/run_tests_ForwardList.dir/tests/test_ForwardList.cpp.i
+.PHONY : tests/test_ForwardList.cpp.i
+
+tests/test_ForwardList.s: tests/test_ForwardList.cpp.s
+.PHONY : tests/test_ForwardList.s
+
+# target to generate assembly for a file
+tests/test_ForwardList.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_ForwardList.dir/build.make CMakeFiles/run_tests_ForwardList.dir/tests/test_ForwardList.cpp.s
+.PHONY : tests/test_ForwardList.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,9 +199,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... run_tests_DynamicArray"
+	@echo "... run_tests_ForwardList"
 	@echo "... tests/test_DynamicArray.o"
 	@echo "... tests/test_DynamicArray.i"
 	@echo "... tests/test_DynamicArray.s"
+	@echo "... tests/test_ForwardList.o"
+	@echo "... tests/test_ForwardList.i"
+	@echo "... tests/test_ForwardList.s"
 .PHONY : help
 
 
