@@ -65,6 +65,16 @@ CMAKE_BINARY_DIR = /home/anton/3laba_2kurs/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+.PHONY : test/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
@@ -117,50 +127,242 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named run_tests_DynamicArray
+# Target rules for targets named laba1
 
 # Build rule for target.
-run_tests_DynamicArray: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run_tests_DynamicArray
-.PHONY : run_tests_DynamicArray
+laba1: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 laba1
+.PHONY : laba1
 
 # fast build rule for target.
-run_tests_DynamicArray/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_DynamicArray.dir/build.make CMakeFiles/run_tests_DynamicArray.dir/build
-.PHONY : run_tests_DynamicArray/fast
+laba1/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/build
+.PHONY : laba1/fast
 
 #=============================================================================
-# Target rules for targets named run_tests_ForwardList
+# Target rules for targets named test_all
 
 # Build rule for target.
-run_tests_ForwardList: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run_tests_ForwardList
-.PHONY : run_tests_ForwardList
+test_all: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_all
+.PHONY : test_all
 
 # fast build rule for target.
-run_tests_ForwardList/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_ForwardList.dir/build.make CMakeFiles/run_tests_ForwardList.dir/build
-.PHONY : run_tests_ForwardList/fast
+test_all/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/build
+.PHONY : test_all/fast
 
 #=============================================================================
-# Target rules for targets named run_tests_LinkedList
+# Target rules for targets named coverage
 
 # Build rule for target.
-run_tests_LinkedList: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run_tests_LinkedList
-.PHONY : run_tests_LinkedList
+coverage: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 coverage
+.PHONY : coverage
 
 # fast build rule for target.
-run_tests_LinkedList/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_LinkedList.dir/build.make CMakeFiles/run_tests_LinkedList.dir/build
-.PHONY : run_tests_LinkedList/fast
+coverage/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/coverage.dir/build.make CMakeFiles/coverage.dir/build
+.PHONY : coverage/fast
+
+src/DynamicArray.o: src/DynamicArray.cpp.o
+.PHONY : src/DynamicArray.o
+
+# target to build an object file
+src/DynamicArray.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/DynamicArray.cpp.o
+.PHONY : src/DynamicArray.cpp.o
+
+src/DynamicArray.i: src/DynamicArray.cpp.i
+.PHONY : src/DynamicArray.i
+
+# target to preprocess a source file
+src/DynamicArray.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/DynamicArray.cpp.i
+.PHONY : src/DynamicArray.cpp.i
+
+src/DynamicArray.s: src/DynamicArray.cpp.s
+.PHONY : src/DynamicArray.s
+
+# target to generate assembly for a file
+src/DynamicArray.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/DynamicArray.cpp.s
+.PHONY : src/DynamicArray.cpp.s
+
+src/FBT.o: src/FBT.cpp.o
+.PHONY : src/FBT.o
+
+# target to build an object file
+src/FBT.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/FBT.cpp.o
+.PHONY : src/FBT.cpp.o
+
+src/FBT.i: src/FBT.cpp.i
+.PHONY : src/FBT.i
+
+# target to preprocess a source file
+src/FBT.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/FBT.cpp.i
+.PHONY : src/FBT.cpp.i
+
+src/FBT.s: src/FBT.cpp.s
+.PHONY : src/FBT.s
+
+# target to generate assembly for a file
+src/FBT.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/FBT.cpp.s
+.PHONY : src/FBT.cpp.s
+
+src/ForwardList.o: src/ForwardList.cpp.o
+.PHONY : src/ForwardList.o
+
+# target to build an object file
+src/ForwardList.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/ForwardList.cpp.o
+.PHONY : src/ForwardList.cpp.o
+
+src/ForwardList.i: src/ForwardList.cpp.i
+.PHONY : src/ForwardList.i
+
+# target to preprocess a source file
+src/ForwardList.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/ForwardList.cpp.i
+.PHONY : src/ForwardList.cpp.i
+
+src/ForwardList.s: src/ForwardList.cpp.s
+.PHONY : src/ForwardList.s
+
+# target to generate assembly for a file
+src/ForwardList.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/ForwardList.cpp.s
+.PHONY : src/ForwardList.cpp.s
+
+src/LinkedList.o: src/LinkedList.cpp.o
+.PHONY : src/LinkedList.o
+
+# target to build an object file
+src/LinkedList.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/LinkedList.cpp.o
+.PHONY : src/LinkedList.cpp.o
+
+src/LinkedList.i: src/LinkedList.cpp.i
+.PHONY : src/LinkedList.i
+
+# target to preprocess a source file
+src/LinkedList.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/LinkedList.cpp.i
+.PHONY : src/LinkedList.cpp.i
+
+src/LinkedList.s: src/LinkedList.cpp.s
+.PHONY : src/LinkedList.s
+
+# target to generate assembly for a file
+src/LinkedList.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/LinkedList.cpp.s
+.PHONY : src/LinkedList.cpp.s
+
+src/Queue.o: src/Queue.cpp.o
+.PHONY : src/Queue.o
+
+# target to build an object file
+src/Queue.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/Queue.cpp.o
+.PHONY : src/Queue.cpp.o
+
+src/Queue.i: src/Queue.cpp.i
+.PHONY : src/Queue.i
+
+# target to preprocess a source file
+src/Queue.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/Queue.cpp.i
+.PHONY : src/Queue.cpp.i
+
+src/Queue.s: src/Queue.cpp.s
+.PHONY : src/Queue.s
+
+# target to generate assembly for a file
+src/Queue.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/Queue.cpp.s
+.PHONY : src/Queue.cpp.s
+
+src/Stack.o: src/Stack.cpp.o
+.PHONY : src/Stack.o
+
+# target to build an object file
+src/Stack.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/Stack.cpp.o
+.PHONY : src/Stack.cpp.o
+
+src/Stack.i: src/Stack.cpp.i
+.PHONY : src/Stack.i
+
+# target to preprocess a source file
+src/Stack.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/Stack.cpp.i
+.PHONY : src/Stack.cpp.i
+
+src/Stack.s: src/Stack.cpp.s
+.PHONY : src/Stack.s
+
+# target to generate assembly for a file
+src/Stack.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/Stack.cpp.s
+.PHONY : src/Stack.cpp.s
+
+src/hash.o: src/hash.cpp.o
+.PHONY : src/hash.o
+
+# target to build an object file
+src/hash.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/hash.cpp.o
+.PHONY : src/hash.cpp.o
+
+src/hash.i: src/hash.cpp.i
+.PHONY : src/hash.i
+
+# target to preprocess a source file
+src/hash.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/hash.cpp.i
+.PHONY : src/hash.cpp.i
+
+src/hash.s: src/hash.cpp.s
+.PHONY : src/hash.s
+
+# target to generate assembly for a file
+src/hash.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/hash.cpp.s
+.PHONY : src/hash.cpp.s
+
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba1.dir/build.make CMakeFiles/laba1.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 tests/test_DynamicArray.o: tests/test_DynamicArray.cpp.o
 .PHONY : tests/test_DynamicArray.o
 
 # target to build an object file
 tests/test_DynamicArray.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_DynamicArray.dir/build.make CMakeFiles/run_tests_DynamicArray.dir/tests/test_DynamicArray.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_DynamicArray.cpp.o
 .PHONY : tests/test_DynamicArray.cpp.o
 
 tests/test_DynamicArray.i: tests/test_DynamicArray.cpp.i
@@ -168,7 +370,7 @@ tests/test_DynamicArray.i: tests/test_DynamicArray.cpp.i
 
 # target to preprocess a source file
 tests/test_DynamicArray.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_DynamicArray.dir/build.make CMakeFiles/run_tests_DynamicArray.dir/tests/test_DynamicArray.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_DynamicArray.cpp.i
 .PHONY : tests/test_DynamicArray.cpp.i
 
 tests/test_DynamicArray.s: tests/test_DynamicArray.cpp.s
@@ -176,15 +378,39 @@ tests/test_DynamicArray.s: tests/test_DynamicArray.cpp.s
 
 # target to generate assembly for a file
 tests/test_DynamicArray.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_DynamicArray.dir/build.make CMakeFiles/run_tests_DynamicArray.dir/tests/test_DynamicArray.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_DynamicArray.cpp.s
 .PHONY : tests/test_DynamicArray.cpp.s
+
+tests/test_FBT.o: tests/test_FBT.cpp.o
+.PHONY : tests/test_FBT.o
+
+# target to build an object file
+tests/test_FBT.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_FBT.cpp.o
+.PHONY : tests/test_FBT.cpp.o
+
+tests/test_FBT.i: tests/test_FBT.cpp.i
+.PHONY : tests/test_FBT.i
+
+# target to preprocess a source file
+tests/test_FBT.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_FBT.cpp.i
+.PHONY : tests/test_FBT.cpp.i
+
+tests/test_FBT.s: tests/test_FBT.cpp.s
+.PHONY : tests/test_FBT.s
+
+# target to generate assembly for a file
+tests/test_FBT.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_FBT.cpp.s
+.PHONY : tests/test_FBT.cpp.s
 
 tests/test_ForwardList.o: tests/test_ForwardList.cpp.o
 .PHONY : tests/test_ForwardList.o
 
 # target to build an object file
 tests/test_ForwardList.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_ForwardList.dir/build.make CMakeFiles/run_tests_ForwardList.dir/tests/test_ForwardList.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_ForwardList.cpp.o
 .PHONY : tests/test_ForwardList.cpp.o
 
 tests/test_ForwardList.i: tests/test_ForwardList.cpp.i
@@ -192,7 +418,7 @@ tests/test_ForwardList.i: tests/test_ForwardList.cpp.i
 
 # target to preprocess a source file
 tests/test_ForwardList.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_ForwardList.dir/build.make CMakeFiles/run_tests_ForwardList.dir/tests/test_ForwardList.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_ForwardList.cpp.i
 .PHONY : tests/test_ForwardList.cpp.i
 
 tests/test_ForwardList.s: tests/test_ForwardList.cpp.s
@@ -200,7 +426,7 @@ tests/test_ForwardList.s: tests/test_ForwardList.cpp.s
 
 # target to generate assembly for a file
 tests/test_ForwardList.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_ForwardList.dir/build.make CMakeFiles/run_tests_ForwardList.dir/tests/test_ForwardList.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_ForwardList.cpp.s
 .PHONY : tests/test_ForwardList.cpp.s
 
 tests/test_LinkedList.o: tests/test_LinkedList.cpp.o
@@ -208,7 +434,7 @@ tests/test_LinkedList.o: tests/test_LinkedList.cpp.o
 
 # target to build an object file
 tests/test_LinkedList.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_LinkedList.dir/build.make CMakeFiles/run_tests_LinkedList.dir/tests/test_LinkedList.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_LinkedList.cpp.o
 .PHONY : tests/test_LinkedList.cpp.o
 
 tests/test_LinkedList.i: tests/test_LinkedList.cpp.i
@@ -216,7 +442,7 @@ tests/test_LinkedList.i: tests/test_LinkedList.cpp.i
 
 # target to preprocess a source file
 tests/test_LinkedList.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_LinkedList.dir/build.make CMakeFiles/run_tests_LinkedList.dir/tests/test_LinkedList.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_LinkedList.cpp.i
 .PHONY : tests/test_LinkedList.cpp.i
 
 tests/test_LinkedList.s: tests/test_LinkedList.cpp.s
@@ -224,8 +450,80 @@ tests/test_LinkedList.s: tests/test_LinkedList.cpp.s
 
 # target to generate assembly for a file
 tests/test_LinkedList.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_LinkedList.dir/build.make CMakeFiles/run_tests_LinkedList.dir/tests/test_LinkedList.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_LinkedList.cpp.s
 .PHONY : tests/test_LinkedList.cpp.s
+
+tests/test_Queue.o: tests/test_Queue.cpp.o
+.PHONY : tests/test_Queue.o
+
+# target to build an object file
+tests/test_Queue.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_Queue.cpp.o
+.PHONY : tests/test_Queue.cpp.o
+
+tests/test_Queue.i: tests/test_Queue.cpp.i
+.PHONY : tests/test_Queue.i
+
+# target to preprocess a source file
+tests/test_Queue.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_Queue.cpp.i
+.PHONY : tests/test_Queue.cpp.i
+
+tests/test_Queue.s: tests/test_Queue.cpp.s
+.PHONY : tests/test_Queue.s
+
+# target to generate assembly for a file
+tests/test_Queue.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_Queue.cpp.s
+.PHONY : tests/test_Queue.cpp.s
+
+tests/test_Stack.o: tests/test_Stack.cpp.o
+.PHONY : tests/test_Stack.o
+
+# target to build an object file
+tests/test_Stack.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_Stack.cpp.o
+.PHONY : tests/test_Stack.cpp.o
+
+tests/test_Stack.i: tests/test_Stack.cpp.i
+.PHONY : tests/test_Stack.i
+
+# target to preprocess a source file
+tests/test_Stack.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_Stack.cpp.i
+.PHONY : tests/test_Stack.cpp.i
+
+tests/test_Stack.s: tests/test_Stack.cpp.s
+.PHONY : tests/test_Stack.s
+
+# target to generate assembly for a file
+tests/test_Stack.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_Stack.cpp.s
+.PHONY : tests/test_Stack.cpp.s
+
+tests/test_hash.o: tests/test_hash.cpp.o
+.PHONY : tests/test_hash.o
+
+# target to build an object file
+tests/test_hash.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_hash.cpp.o
+.PHONY : tests/test_hash.cpp.o
+
+tests/test_hash.i: tests/test_hash.cpp.i
+.PHONY : tests/test_hash.i
+
+# target to preprocess a source file
+tests/test_hash.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_hash.cpp.i
+.PHONY : tests/test_hash.cpp.i
+
+tests/test_hash.s: tests/test_hash.cpp.s
+.PHONY : tests/test_hash.s
+
+# target to generate assembly for a file
+tests/test_hash.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_all.dir/build.make CMakeFiles/test_all.dir/tests/test_hash.cpp.s
+.PHONY : tests/test_hash.cpp.s
 
 # Help Target
 help:
@@ -235,18 +533,55 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... run_tests_DynamicArray"
-	@echo "... run_tests_ForwardList"
-	@echo "... run_tests_LinkedList"
+	@echo "... test"
+	@echo "... coverage"
+	@echo "... laba1"
+	@echo "... test_all"
+	@echo "... src/DynamicArray.o"
+	@echo "... src/DynamicArray.i"
+	@echo "... src/DynamicArray.s"
+	@echo "... src/FBT.o"
+	@echo "... src/FBT.i"
+	@echo "... src/FBT.s"
+	@echo "... src/ForwardList.o"
+	@echo "... src/ForwardList.i"
+	@echo "... src/ForwardList.s"
+	@echo "... src/LinkedList.o"
+	@echo "... src/LinkedList.i"
+	@echo "... src/LinkedList.s"
+	@echo "... src/Queue.o"
+	@echo "... src/Queue.i"
+	@echo "... src/Queue.s"
+	@echo "... src/Stack.o"
+	@echo "... src/Stack.i"
+	@echo "... src/Stack.s"
+	@echo "... src/hash.o"
+	@echo "... src/hash.i"
+	@echo "... src/hash.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 	@echo "... tests/test_DynamicArray.o"
 	@echo "... tests/test_DynamicArray.i"
 	@echo "... tests/test_DynamicArray.s"
+	@echo "... tests/test_FBT.o"
+	@echo "... tests/test_FBT.i"
+	@echo "... tests/test_FBT.s"
 	@echo "... tests/test_ForwardList.o"
 	@echo "... tests/test_ForwardList.i"
 	@echo "... tests/test_ForwardList.s"
 	@echo "... tests/test_LinkedList.o"
 	@echo "... tests/test_LinkedList.i"
 	@echo "... tests/test_LinkedList.s"
+	@echo "... tests/test_Queue.o"
+	@echo "... tests/test_Queue.i"
+	@echo "... tests/test_Queue.s"
+	@echo "... tests/test_Stack.o"
+	@echo "... tests/test_Stack.i"
+	@echo "... tests/test_Stack.s"
+	@echo "... tests/test_hash.o"
+	@echo "... tests/test_hash.i"
+	@echo "... tests/test_hash.s"
 .PHONY : help
 
 
