@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "/home/anton/3laba_2kurs/src/LinkedList.h"
+#include "/home/anton/3laba_2kurs/src/LinkedList.cpp"
 
 TEST(LinkedList_test, constructor)
 {

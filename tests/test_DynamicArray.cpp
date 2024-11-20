@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "/home/anton/3laba_2kurs/src/DynamicArray.h"
+#include "/home/anton/3laba_2kurs/src/DynamicArray.cpp"
 
 TEST(DynamicArray_test, defaultConstructor)
 {

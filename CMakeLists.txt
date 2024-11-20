@@ -1,72 +1,59 @@
-# Минимальная версия CMake
 cmake_minimum_required(VERSION 3.10)
 
 # Название проекта
-project(MyProject)
+project(laba1)
 
-# Указываем директорию с исходниками
-include_directories(src)
+# Устанавливаем флаги для покрытия (если нужно)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 
-# Google Test
-find_package(GTest REQUIRED)
-
-# Установим, чтобы все тесты сохранялись в папке build/tests/
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
-# Включаем флаги для покрытия кода
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
-
-# Указываем директорию для отчетов
-set(COVERAGE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/coverage)
-
-# Флаги покрытия для компиляции и линковки
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
-
-
-# Добавляем пользовательскую цель для покрытия кода
-add_custom_target(coverage
-    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-    COMMAND lcov --directory . --capture --output-file coverage.info
-    COMMAND lcov --remove coverage.info '/usr/*' '*/test/*' --output-file coverage.info.cleaned
-    COMMAND genhtml coverage.info.cleaned --output-directory ${COVERAGE_OUTPUT_DIRECTORY}
-    COMMAND echo "Coverage report generated in ${COVERAGE_OUTPUT_DIRECTORY}/index.html"
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+# Указываем исходные файлы проекта
+set(SOURCES
+    src/main.cpp
+    src/DynamicArray.cpp
+    src/FBT.cpp
+    src/ForwardList.cpp
+    src/hash.cpp
+    src/library.h
+    src/LinkedList.cpp
+    src/Queue.cpp
+    src/Stack.cpp
 )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 --coverage -fprofile-arcs -ftest-coverage")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
-# Директория для сохранения отчётов
-set(COVERAGE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/coverage)
+# Создаем исполнимый файл для проекта
+add_executable(laba1 ${SOURCES})
 
-# Добавление пользовательской цели
-add_custom_target(coverage
-    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-    COMMAND lcov --directory . --capture --output-file coverage.info
-    COMMAND lcov --remove coverage.info '/usr/*' '*/tests/*' --output-file coverage.cleaned.info
-    COMMAND genhtml coverage.cleaned.info --output-directory ${COVERAGE_OUTPUT_DIRECTORY}
-    COMMAND echo "Coverage report generated in ${COVERAGE_OUTPUT_DIRECTORY}/index.html"
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-)
-
-
-
-# Тесты для MyClass1
-add_executable(run_tests_DynamicArray
+# Указываем исходные файлы для тестов
+set(TEST_SOURCES
     tests/test_DynamicArray.cpp
-    src/DynamicArray.h
-)
-target_link_libraries(run_tests_DynamicArray GTest::GTest GTest::Main)
-
-add_executable(run_tests_ForwardList
     tests/test_ForwardList.cpp
-    src/ForwardList.h
-)
-target_link_libraries(run_tests_ForwardList GTest::GTest GTest::Main)
-
-add_executable(run_tests_LinkedList
     tests/test_LinkedList.cpp
-    src/ForwardList.h
+    tests/test_Queue.cpp
+    tests/test_Stack.cpp
+    tests/test_FBT.cpp
+    tests/test_hash.cpp
 )
-target_link_libraries(run_tests_LinkedList GTest::GTest GTest::Main)
 
-# Добавьте аналогичные секции для других тестов...
+# Создаем исполнимый файл для тестов
+add_executable(test_all ${TEST_SOURCES})
+
+# Линковка с GoogleTest
+find_package(GTest REQUIRED)
+target_link_libraries(test_all GTest::GTest GTest::Main)
+
+# Регистрируем тесты с CTest
+enable_testing()
+add_test(NAME run_all_tests COMMAND test_all)
+
+# Запуск тестов после сборки
+add_custom_command(TARGET test_all POST_BUILD
+    COMMAND ctest
+    COMMENT "Запуск тестов после сборки"
+)
+
+# Команды для сбора покрытия
+add_custom_target(coverage
+    COMMAND lcov --directory . --capture --output-file coverage.info
+    COMMAND lcov --remove coverage.info '/usr/*' --output-file coverage_cleaned.info
+    COMMAND genhtml coverage_cleaned.info --output-directory out
+    COMMENT "Генерация отчета покрытия"
+)

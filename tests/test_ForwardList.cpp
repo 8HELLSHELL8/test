@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "/home/anton/3laba_2kurs/src/ForwardList.h"
+#include "/home/anton/3laba_2kurs/src/ForwardList.cpp"
 
 TEST(ForwardList_test, defaultConstructor)
 {

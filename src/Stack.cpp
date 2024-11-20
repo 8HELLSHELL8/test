@@ -1,5 +1,5 @@
 #pragma once
-#include "DynamicArray.h"
+#include "DynamicArray.cpp"
 
 struct Stack 
 {
