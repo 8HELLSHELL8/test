@@ -1,4 +1,3 @@
-#pragma once
 #include "library.h"
 
 struct LinkedList 
@@ -360,4 +359,60 @@ public:
         write_file.close();  
     }
     
+    void serialize(const string& fileName)
+    {
+        ofstream fileOut(fileName, ios::binary);
+        if (!fileOut.is_open())
+        {
+            cerr << "Error opening for serialization" << endl;
+            return;
+        }
+        size_t listSize = this->size();
+        fileOut.write(reinterpret_cast<char*>(&listSize), sizeof(listSize));
+
+        Node* current = head;
+        for (int i = 0; i < listSize; i++)
+        {
+            size_t wordSize = current->person.size();
+            fileOut.write(reinterpret_cast<char*>(&wordSize), sizeof(wordSize));
+            fileOut.write(current->person.c_str(), wordSize);
+
+            current = current->next;
+        }
+        cout << "Serialization done!" << endl;
+        fileOut.close();
+    }
+
+    void deserialize(const string& fileName)
+    {
+        ifstream fileIn(fileName, ios::binary);
+        if (!fileIn.is_open())
+        {
+            cerr << "Error opening for deserialization" << endl;
+            return;
+        }
+
+        size_t listSize;
+        fileIn.read(reinterpret_cast<char*>(&listSize), sizeof(listSize));
+        for (int i = 0; i < listSize; i++)
+        {
+            size_t wordSize;
+            fileIn.read(reinterpret_cast<char*>(&wordSize), sizeof(wordSize));
+            char* word = new char[wordSize + 1];
+            fileIn.read(word, wordSize);
+            word[wordSize] = '\0';
+
+            addtail(string(word));
+
+            delete[] word;
+        }
+
+
+        cout << "Deserialization done!" << endl;
+        fileIn.close();
+    }
+    
+
+
+
 };

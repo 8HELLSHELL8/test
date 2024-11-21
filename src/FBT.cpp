@@ -1,4 +1,3 @@
-#pragma once
 #include "DynamicArray.cpp"
 
 
@@ -315,7 +314,7 @@ public:
     {
 
         ifstream read_file(filename);
-        DynamicArray<string> lines; // Используем вектор для хранения строк
+        DynamicArray lines; // Используем вектор для хранения строк
         string line;
         bool structure_found = false;
 
@@ -395,6 +394,94 @@ public:
         write_file.close(); 
     }
 
+    void serialize(const string& filename) const
+    {
+        ofstream fileOut(filename, ios::binary);
+        if (!fileOut.is_open()) 
+        {
+            cerr << "Error opening file for serialization!" << endl;
+            return;
+        }
+
+        Queue<node*> tempQueue = allNodes; // Используем очередь для обхода всех узлов
+        while (!tempQueue.is_empty()) 
+        {
+            node* currentNode = tempQueue.front();
+            tempQueue.dequeue();
+
+            // Сохраняем ключ узла
+            fileOut.write(reinterpret_cast<char*>(&currentNode->key), sizeof(currentNode->key));
+
+            // Сохраняем информацию о детях
+            bool hasLeftChild = (currentNode->leftChild != nullptr);
+            bool hasRightChild = (currentNode->rightChild != nullptr);
+            fileOut.write(reinterpret_cast<char*>(&hasLeftChild), sizeof(hasLeftChild));
+            fileOut.write(reinterpret_cast<char*>(&hasRightChild), sizeof(hasRightChild));
+        }
+
+        cout << "Serialization complete." << endl;
+        fileOut.close();
+    }
+
+    void deserialize(const string& filename)
+    {
+        ifstream fileIn(filename, ios::binary);
+        if (!fileIn.is_open()) 
+        {
+            cerr << "Error opening file for deserialization!" << endl;
+            return;
+        }
+
+        // Очищаем текущее дерево
+        while (!waitlist.is_empty())
+        {
+            waitlist.dequeue();
+        }
+        while (!allNodes.is_empty())
+        {
+            node* currentNode = allNodes.front();
+            allNodes.dequeue();
+            delete currentNode;
+        }
+        root = nullptr;
+
+        // Считываем данные из файла
+        Queue<node*> tempQueue; // Очередь для восстановления дерева
+        int key;
+        while (fileIn.read(reinterpret_cast<char*>(&key), sizeof(key))) 
+        {
+            bool hasLeftChild, hasRightChild;
+            fileIn.read(reinterpret_cast<char*>(&hasLeftChild), sizeof(hasLeftChild));
+            fileIn.read(reinterpret_cast<char*>(&hasRightChild), sizeof(hasRightChild));
+
+            node* newNode = new node(key);
+            allNodes.enqueue(newNode);
+
+            if (root == nullptr) 
+            {
+                root = newNode; // Устанавливаем корень дерева
+            } 
+            else 
+            {
+                node* parent = tempQueue.front();
+                if (parent->leftChild == nullptr) 
+                {
+                    parent->leftChild = newNode;
+                } 
+                else if (parent->rightChild == nullptr) 
+                {
+                    parent->rightChild = newNode;
+                    tempQueue.dequeue(); // Убираем родителя из очереди, если оба ребенка установлены
+                }
+            }
+
+            if (hasLeftChild || hasRightChild) 
+            {
+                tempQueue.enqueue(newNode);
+            }
+        }
+
+        cout << "Deserialization complete." << endl;
+        fileIn.close();
+    }
 };
-
-

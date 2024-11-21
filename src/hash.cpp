@@ -1,4 +1,3 @@
-#pragma once
 #include "DynamicArray.cpp"
 
 
@@ -203,7 +202,7 @@ public:
     {
         // Читаем существующие данные из файла
         ifstream read_file(filename);
-        DynamicArray<string> lines;
+        DynamicArray lines;
         string line;
         bool structure_found = false;
 
@@ -285,6 +284,103 @@ public:
         }
 
         write_file.close();
+    }
+
+    void serialize(const string& filename) const 
+    {
+        ofstream fileOut(filename, ios::binary);
+        if (!fileOut.is_open()) 
+        {
+            cerr << "Error opening file for serialization!" << endl;
+            return;
+        }
+
+        // Сохраняем размер таблицы
+        fileOut.write(reinterpret_cast<const char*>(&size), sizeof(size));
+
+        // Сохраняем ключ-значение
+        for (int i = 0; i < size; ++i) 
+        {
+            Node* current = table[i];
+            while (current != nullptr) 
+            {
+                // Сохраняем длину ключа и сам ключ
+                int keyLength = current->key.size();
+                fileOut.write(reinterpret_cast<const char*>(&keyLength), sizeof(keyLength));
+                fileOut.write(current->key.c_str(), keyLength);
+
+                // Сохраняем длину значения и само значение
+                int valueLength = current->value.size();
+                fileOut.write(reinterpret_cast<const char*>(&valueLength), sizeof(valueLength));
+                fileOut.write(current->value.c_str(), valueLength);
+
+                current = current->next;
+            }
+        }
+
+        cout << "Serialization complete." << endl;
+        fileOut.close();
+    }
+
+    void deserialize(const string& filename) 
+    {
+        ifstream fileIn(filename, ios::binary);
+        if (!fileIn.is_open()) 
+        {
+            cerr << "Error opening file for deserialization!" << endl;
+            return;
+        }
+
+        // Очищаем текущую хеш-таблицу
+        for (int i = 0; i < size; ++i) 
+        {
+            Node* current = table[i];
+            while (current != nullptr) 
+            {
+                Node* temp = current;
+                current = current->next;
+                delete temp;
+            }
+            table[i] = nullptr;
+        }
+
+        // Читаем размер таблицы
+        int newSize;
+        fileIn.read(reinterpret_cast<char*>(&newSize), sizeof(newSize));
+
+        // Если размер таблицы изменился, пересоздаём массив
+        if (newSize != size) 
+        {
+            delete[] table;
+            size = newSize;
+            table = new Node * [size];
+            for (int i = 0; i < size; ++i) 
+            {
+                table[i] = nullptr;
+            }
+        }
+
+        // Читаем ключ-значение
+        while (fileIn.peek() != EOF) 
+        {
+            // Читаем длину ключа и сам ключ
+            int keyLength;
+            fileIn.read(reinterpret_cast<char*>(&keyLength), sizeof(keyLength));
+            string key(keyLength, '\0');
+            fileIn.read(&key[0], keyLength);
+
+            // Читаем длину значения и само значение
+            int valueLength;
+            fileIn.read(reinterpret_cast<char*>(&valueLength), sizeof(valueLength));
+            string value(valueLength, '\0');
+            fileIn.read(&value[0], valueLength);
+
+            // Добавляем ключ-значение в хеш-таблицу
+            add(key, value);
+        }
+
+        cout << "Deserialization complete." << endl;
+        fileIn.close();
     }
 
 };

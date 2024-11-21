@@ -1,4 +1,3 @@
-#pragma once
 #include "DynamicArray.cpp"
 
 struct Stack 
@@ -102,7 +101,7 @@ public:
     void save_to_file(const string& filename, const string& name_structure) const 
     {
         ifstream read_file(filename);
-        DynamicArray<string> lines;
+        DynamicArray lines;
         string line;
         bool structure_found = false;
 
@@ -220,4 +219,66 @@ public:
 
         file.close();
     }
+
+    int size()
+    {
+        Node* current = head;
+        int i = 0;
+        while(current)
+        {
+            i++;
+            current = current->next;
+        }
+        return i;
+    }
+
+    void serialize(const string& fileName)
+    {
+        ofstream fileOut(fileName, ios::binary);
+        if (!fileOut.is_open())
+        {
+            cerr << "Error opening file for serialization!" << endl;
+        }
+
+        int stackSize = this->size();
+        fileOut.write(reinterpret_cast<char*>(&stackSize), sizeof(stackSize));
+
+        Node* current = head;
+        for (int i = 0; i < stackSize; i++, current = current->next)
+        {
+            size_t wordSize = current->person.size();
+            fileOut.write(reinterpret_cast<char*>(&wordSize), sizeof(wordSize));
+            fileOut.write(current->person.c_str(), wordSize);
+        }
+        cout << "Serialization done!" << endl;
+        fileOut.close();
+    }
+
+     void deserialize(const string& fileName)
+    {
+        ifstream fileIn(fileName, ios::binary);
+        if (!fileIn.is_open())
+        {
+            cerr << "Error opening file for deserialization" << endl;
+            return;
+        }
+
+        int newSize;
+        fileIn.read(reinterpret_cast<char*>(&newSize), sizeof(newSize));
+
+        for (int i = 0; i < newSize; i++)
+        {
+            size_t wordSize;
+            fileIn.read(reinterpret_cast<char*>(&wordSize), sizeof(wordSize));
+            char* word = new char[wordSize + 1];
+            fileIn.read(word, wordSize);
+            word[wordSize] = '\0';
+            push(string(word));
+            delete[] word;
+        }
+
+        cout << "Deserialization done!" << endl;
+        fileIn.close();
+    }
+
 };

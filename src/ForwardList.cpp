@@ -1,4 +1,3 @@
-#pragma once
 #include "library.h"
 
 struct ForwardList 
@@ -348,4 +347,59 @@ public:
 
         write_file.close();
     }
+
+    void serialize(const string& fileName)
+    {
+        ofstream fileOut(fileName, ios::binary);
+        if (!fileOut.is_open())
+        {
+            cerr << "Error opening file for serialization" << endl;
+            return;
+        }
+        size_t listSize = this->size();
+        fileOut.write(reinterpret_cast<char*>(&listSize), sizeof(listSize));
+        Node* current = head;
+        for (int i = 0; i < listSize; i++)
+        {
+            size_t wordLenght = current->person.size();
+            fileOut.write(reinterpret_cast<char*>(&wordLenght), sizeof(wordLenght));
+            fileOut.write(current->person.c_str(), wordLenght);
+
+            current = current->next;
+        }
+        cout << "Serialization done!" << endl;
+        fileOut.close();
+
+    }
+
+    void deserialize(const string& fileName)
+    {
+        ifstream fileIn(fileName, ios::binary);
+        if (!fileIn.is_open())
+        {
+            cerr << "Error opening file for deserialization" << endl;
+            return;
+        }
+        
+        size_t listSize;
+        fileIn.read(reinterpret_cast<char*>(&listSize), sizeof(listSize));
+
+        for (size_t i = 0; i < listSize; i++)
+        {
+            size_t wordSize;
+            fileIn.read(reinterpret_cast<char*>(&wordSize), sizeof(wordSize));
+
+            char* word = new char[wordSize + 1];
+            fileIn.read(word, wordSize);
+            word[wordSize] = '\0';
+
+            addtail(string(word));
+            delete[] word; // Освобождаем память
+        }
+
+        cout << "Deserialization done!" << endl;
+        fileIn.close();
+    }
+
+
 };
