@@ -163,12 +163,79 @@ func (q *Queue) printAll() {
 	fmt.Println()
 }
 
-func main() {
-	newQueue, filename, err := processQueue()
+// Сериализация очереди в текстовый файл
+func (q *Queue) serializeToTxtFile(filename string) error {
+	// Создаем файл для записи
+	file, err := os.Create(filename)
 	if err != nil {
-		fmt.Println(err)
+		return fmt.Errorf("failed to create file: %v", err)
+	}
+	defer file.Close()
+
+	// Записываем содержимое очереди построчно
+	currentNode := q.head
+	for currentNode != nil {
+		_, err := file.WriteString(currentNode.content + "\n")
+		if err != nil {
+			return fmt.Errorf("failed to write to file: %v", err)
+		}
+		currentNode = currentNode.next
+	}
+
+	return nil
+}
+
+// Десериализация очереди из текстового файла
+func (q *Queue) deserializeFromTxtFile(filename string) error {
+	// Открываем файл для чтения
+	file, err := os.Open(filename)
+	if err != nil {
+		return fmt.Errorf("failed to open file: %v", err)
+	}
+	defer file.Close()
+
+	// Очищаем текущую очередь
+	*q = *newQueue()
+
+	// Сканируем файл построчно и добавляем элементы в очередь
+	var line string
+	for {
+		_, err := fmt.Fscanf(file, "%s\n", &line)
+		if err != nil {
+			if err.Error() == "EOF" { // Конец файла
+				break
+			}
+			return fmt.Errorf("failed to read from file: %v", err)
+		}
+		q.push(line)
+	}
+
+	return nil
+}
+
+func main() {
+	// Создаем очередь и добавляем элементы
+	queue := newQueue()
+	queue.push("10")
+	queue.push("20")
+	queue.push("30")
+
+	// Сериализация в текстовый файл
+	txtFilename := "queue.txt"
+	err := queue.serializeToTxtFile(txtFilename)
+	if err != nil {
+		fmt.Printf("Error serializing to txt file: %v\n", err)
 		return
 	}
-	fmt.Println("Queue deserialized from file:", filename)
+	fmt.Printf("Queue serialized to txt file: %s\n", txtFilename)
+
+	// Десериализация из текстового файла
+	newQueue := newQueue()
+	err = newQueue.deserializeFromTxtFile(txtFilename)
+	if err != nil {
+		fmt.Printf("Error deserializing from txt file: %v\n", err)
+		return
+	}
+	fmt.Println("Queue deserialized from txt file:")
 	newQueue.printAll()
 }
